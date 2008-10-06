@@ -1,0 +1,18 @@
+<h1>Phrases</h1>
+
+<table>
+  <% for phrase in @phrases %>
+    <tr>
+      <td>
+        <%= link_to phrase.text, edit_admin_phrase_path(phrase) %>
+        [
+        <%= link_to "x", admin_phrase_path(phrase), :confirm => "Are you sure?", :method => :delete %>
+        ]
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<p>
+  <%= link_to "New Phrase",  new_admin_phrase_path %>
+</p>

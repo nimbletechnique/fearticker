@@ -6,6 +6,8 @@ ActionController::Routing::Routes.draw do |map|
   map.namespace :admin do |admin|
     admin.resources :pages
     admin.resources :phrases
+    admin.resources :updates
+    admin.resources :resets
   end
 
   map.login "/login", :controller => "sessions", :action => "new"

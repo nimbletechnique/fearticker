@@ -9,6 +9,8 @@
       <%= link_to "Home", root_path %> |
       <%= link_to "Pages", admin_pages_path %> |
       <%= link_to "Phrases", admin_phrases_path %> |
+      <%= link_to "Update All", admin_updates_path, :method => :post %> |
+      <%= link_to "Reset All", admin_resets_path, :method => :post, :confirm => "Are you sure?" %> |
       <%= link_to "Logout", logout_path %>
       <hr/>
     <% end %>

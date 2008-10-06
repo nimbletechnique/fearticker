@@ -1,0 +1,6 @@
+<h1>Edit Phrase</h1>
+
+<%= error_messages_for :phrase %>
+<% form_for :phrase, @phrase, :url => admin_phrase_path(@phrase), :html => { :method => :put } do |f| %>
+  <%= render :partial => "fields", :locals => { :f => f } %>
+<% end %>
