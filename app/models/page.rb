@@ -6,6 +6,12 @@ class Page < ActiveRecord::Base
   has_many :phrase_counts
   has_many :phrases, :through => :phrase_counts
   
+  def self.count_all
+    Page.all.each do |page|
+      page.count Phrase.all.map { |phrase| phrase.text }
+    end
+  end
+  
   def count(*phrases)
     content = fetch
     phrases.flatten.each do |phrase|

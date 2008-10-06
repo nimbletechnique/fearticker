@@ -3,10 +3,10 @@
   <ul class="counts">
     <% for phrase_count in page.phrase_counts %>
       <li>
-        <h3><%= h phrase_count.phrase.text %></h3>
-        <p>
-          <%= h phrase_count.count %>
-        </p>
+        <%= h phrase_count.phrase.text %>:
+        <%= h phrase_count.count %>
+        at
+        <%= h phrase_count.created_at %>
       </li>
     <% end %>
   </ul>
