@@ -9,10 +9,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081006193119) do
+ActiveRecord::Schema.define(:version => 20081006193305) do
 
   create_table "pages", :force => true do |t|
     t.string   "url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "phrase_counts", :force => true do |t|
+    t.integer  "phrase_id"
+    t.integer  "page_id"
+    t.integer  "count"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
