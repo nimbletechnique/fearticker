@@ -30,6 +30,9 @@ class Admin::PagesController < ApplicationController
   end
   
   def destroy
+    @page = Page.find(params[:id])
+    @page.destroy
+    redirect_to :action => "index"
   end
   
 end
