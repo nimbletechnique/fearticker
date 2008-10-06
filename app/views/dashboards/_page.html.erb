@@ -1,12 +1,10 @@
 <li>
   <h2><%= h page.url %></h2>
   <ul class="counts">
-    <% for phrase_count in page.phrase_counts %>
+    <% for phrase in Phrase.for_page(page) %>
       <li>
-        <%= h phrase_count.phrase.text %>:
-        <%= h phrase_count.count %>
-        at
-        <%= h phrase_count.created_at %>
+        <%= h phrase.text %>:
+        <%= h page.average_count_for_since(phrase.text, Time.now.utc - 1.week) %>
       </li>
     <% end %>
   </ul>

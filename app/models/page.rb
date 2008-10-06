@@ -21,6 +21,10 @@ class Page < ActiveRecord::Base
     end
   end
   
+  def average_count_for_since(phrase, since) 
+    phrase_counts.for_phrase(phrase).in_range(since, Time.now.utc).average("phrase_counts.count")
+  end
+  
   private
   
   def count_phrase(content, phrase)
