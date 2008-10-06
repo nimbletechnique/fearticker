@@ -1,8 +1,10 @@
-require 'open-uri'
-
 class Page < ActiveRecord::Base
+
+  named_scope :all, {}
+  named_scope :ordered, :order => "url"
   
   has_many :phrase_counts
+  has_many :phrases, :through => :phrase_counts
   
   def count(*phrases)
     content = fetch

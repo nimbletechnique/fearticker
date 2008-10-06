@@ -1,1 +1,6 @@
-Coming soon.
+<h1>Fearful Pages</h1>
+<ul id="pages">
+  <% for page in @pages %>
+    <%= render :partial => "dashboards/page", :object => page %>
+  <% end %>  
+</ul>
