@@ -3,8 +3,10 @@ class Page < ActiveRecord::Base
   named_scope :all, {}
   named_scope :ordered, :order => "url"
   
-  has_many :phrase_counts
+  has_many :phrase_counts, :dependent => :destroy
   has_many :phrases, :through => :phrase_counts
+  
+  validates_presence_of :url
   
   def self.count_all
     Page.all.each do |page|

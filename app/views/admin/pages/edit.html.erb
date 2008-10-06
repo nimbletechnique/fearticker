@@ -1,0 +1,6 @@
+<h1>Edit Page</h1>
+
+<%= error_messages_for :page %>
+<% form_for :page, @page, :url => admin_page_path(@page), :html => { :method => :put } do |f| %>
+  <%= render :partial => "fields", :locals => { :f => f } %>
+<% end %>

@@ -6,6 +6,7 @@
   </head>
   <body>
     <% if logged_in? %>
+      <%= link_to "Home", root_path %> |
       <%= link_to "Pages", admin_pages_path %> |
       <%= link_to "Phrases", admin_phrases_path %> |
       <%= link_to "Logout", logout_path %>
