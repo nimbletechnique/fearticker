@@ -26,7 +26,7 @@ class Page < ActiveRecord::Base
   def count_phrase(content, phrase)
     phrase_counts.create({
       :phrase => Phrase.find_or_create_by_text(phrase),
-      :count => content.grep(/#{Regexp.quote(phrase)}/)
+      :count => content.grep(/#{Regexp.quote(phrase)}/i).length
     })
   end
   
