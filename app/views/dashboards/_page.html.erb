@@ -3,9 +3,10 @@
   <ul class="counts">
     <% for phrase in Phrase.for_page(page) %>
       <li>
-        <%= h phrase.text %>:
-        <%= h page.average_count_for_since(phrase.text, Time.now.utc - 1.week) %>
-      </li>
+        <% counts = page.counts_since(phrase.text, Time.now.utc - 2.weeks) %>
+        <%= content_tag :img, nil, {
+          :src => "http://chart.apis.google.com/chart?cht=ls&chs=200x75&chl=#{phrase.text}&chd=t:#{counts.map { |c| c.count }.join(",")}"
+        } %>
     <% end %>
   </ul>
 </li>
