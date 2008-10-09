@@ -22,7 +22,8 @@ class Chart
     params = {}
     params[:cht] = "lc"
     params[:chs] = "400x200"
-    params[:chl] = labels
+    params[:chxt] = "x"
+    params[:chl] = x_axis_labels
     params[:chd] = "t:" + points
     params[:chco] = chart_colors
     params[:chdl] = chart_legend
@@ -50,8 +51,9 @@ class Chart
     categories.map { |category| category.points.map { |point| point.count }.join(",") }.join("|")
   end
   
-  def labels
-    categories.map { |category| category.name }.join("|")
+  def x_axis_labels
+    dates = categories.map { |c| c.points.map { |p| p.date }}.flatten.sort.map { |t| t.strftime "%m/%d/%Y" }
+    [dates[0], dates[dates.length / 3], dates[dates.length / 3 * 2], dates.last].join("|")
   end
   
 end
