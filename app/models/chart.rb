@@ -20,10 +20,11 @@ class Chart
   def to_img
     base = "http://chart.apis.google.com/chart"
     params = {}
-    params[:cht] = "ls"
+    params[:cht] = "lc"
     params[:chs] = "400x200"
     params[:chl] = labels
     params[:chd] = "t:" + points
+    params[:chco] = chart_colors
     
     param_string = params.map { |k,v| "#{k}=#{v}" }.join("&amp;")
     url = base + "?" + param_string
@@ -31,6 +32,11 @@ class Chart
   end
 
   private
+  
+  def chart_colors
+    colors = ["FF0000", "00FF00", "0000FF", "000000"]
+    categories.map { |category| colors[categories.index(category) % colors.length ] }.join(",")
+  end
   
   def points
     categories.map { |category| category.points.map { |point| point.count }.join(",") }.join("|")

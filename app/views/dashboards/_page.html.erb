@@ -1,8 +1,4 @@
 <li>
   <h2><%= h page.url %></h2>
-        <%# counts = page.counts_since(phrase.text, Time.now.utc - 2.weeks) %>
-        <%#= content_tag :img, nil, {
-          :src => "http://chart.apis.google.com/chart?chxt=y&amp;chxl=0:|0|100|&amp;cht=ls&amp;chs=200x75&amp;chl=#{phrase.text}&amp;chd=t:#{counts.map { |c| c.count }.join(",")}"
-        } %>
   <%= page.chart_for(2.weeks).to_img %>
 </li>
