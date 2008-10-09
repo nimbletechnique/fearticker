@@ -25,6 +25,7 @@ class Chart
     params[:chl] = labels
     params[:chd] = "t:" + points
     params[:chco] = chart_colors
+    params[:chdl] = chart_legend
     
     param_string = params.map { |k,v| "#{k}=#{v}" }.join("&amp;")
     url = base + "?" + param_string
@@ -33,8 +34,15 @@ class Chart
 
   private
   
+  def colors 
+    @colors ||= ["FF0000", "00FF00", "0000FF", "000000"]
+  end
+  
+  def chart_legend
+    categories.map { |category| category.name }.join("|")
+  end
+  
   def chart_colors
-    colors = ["FF0000", "00FF00", "0000FF", "000000"]
     categories.map { |category| colors[categories.index(category) % colors.length ] }.join(",")
   end
   
