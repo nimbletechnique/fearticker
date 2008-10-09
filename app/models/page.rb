@@ -21,6 +21,12 @@ class Page < ActiveRecord::Base
     end
   end
   
+  # creates a chart for the specified duration of all applicable phrases
+  def chart_for(duration)
+    now = Time.now.utc
+    Chart.for_phrase_counts(phrase_counts.in_range(now - duration, now).ordered)
+  end
+  
   def counts_since(phrase, since)
     phrase_counts.for_phrase(phrase).in_range(since, Time.now.utc).ordered
   end
