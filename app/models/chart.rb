@@ -63,8 +63,11 @@ class Chart
   end
   
   def y_axis_labels
+    how_many = 5
     category_points = categories.map { |c| c.points.map { |p| p.count }}.flatten.sort
-    filter_by_factor_of(category_points, 4).join("|")
+    min = category_points.min
+    max = category_points.max
+    [min, max].join("|")
   end
   
   def x_axis_labels
