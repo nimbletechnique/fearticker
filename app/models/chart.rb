@@ -18,6 +18,8 @@ class Chart
   end
   
   def to_img
+    @categories.delete_if { |c| c.points.all? { |p| p.count == 0 }}
+    
     base = "http://chart.apis.google.com/chart"
     params = {}
     params[:cht] = "lc"
