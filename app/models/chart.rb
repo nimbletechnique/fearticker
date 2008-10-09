@@ -51,7 +51,15 @@ class Chart
   end
   
   def points
-    categories.map { |category| category.points.map { |point| point.count }.join(",") }.join("|")
+    categories.map { |category| normalized_counts(category).join(",") }.join("|")
+  end
+  
+  # the points here must be defined between 1 and 100
+  # for each point, it becomes (point / max * 100 *).to_i
+  def normalized_counts(category)
+    counts = category.points.map { |point| point.count }
+    max = counts.max
+    counts.map { |count| max == 0 ? 0 : (count.to_f / max * 100).to_i }
   end
   
   def y_axis_labels
@@ -66,7 +74,6 @@ class Chart
   
   # filters down an enumeration into a evenly divided slice of items
   def filter_by_factor_of(enum, x)
-    x -= 1
     result = []
     result << enum.first
     current = 1
