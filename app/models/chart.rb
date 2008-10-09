@@ -21,9 +21,12 @@ class Chart
     base = "http://chart.apis.google.com/chart"
     params = {}
     params[:cht] = "lc"
-    params[:chs] = "400x200"
-    params[:chxt] = "x"
-    params[:chl] = x_axis_labels
+    params[:chs] = "600x200"
+    
+    # labels
+    params[:chxt] = "x,y"
+    params[:chxl] = "0:|" + x_axis_labels + "|1:|" + y_axis_labels
+    
     params[:chd] = "t:" + points
     params[:chco] = chart_colors
     params[:chdl] = chart_legend
@@ -51,9 +54,28 @@ class Chart
     categories.map { |category| category.points.map { |point| point.count }.join(",") }.join("|")
   end
   
+  def y_axis_labels
+    category_points = categories.map { |c| c.points.map { |p| p.count }}.flatten.sort
+    filter_by_factor_of(category_points, 4).join("|")
+  end
+  
   def x_axis_labels
     dates = categories.map { |c| c.points.map { |p| p.date }}.flatten.sort.map { |t| t.strftime "%m/%d/%Y" }
-    [dates[0], dates[dates.length / 3], dates[dates.length / 3 * 2], dates.last].join("|")
+    filter_by_factor_of(dates, 4).join("|")
+  end
+  
+  # filters down an enumeration into a evenly divided slice of items
+  def filter_by_factor_of(enum, x)
+    x -= 1
+    result = []
+    result << enum.first
+    current = 1
+    while current < x do
+      current += 1
+      result << enum[enum.length / x * current]
+    end 
+    result << enum.last
+    result
   end
   
 end
