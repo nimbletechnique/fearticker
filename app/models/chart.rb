@@ -18,7 +18,8 @@ class Chart
   end
   
   def to_img
-    @categories.delete_if { |c| c.points.all? { |p| p.count == 0 }}
+    delete_empty_categories
+    sort_categories
     
     base = "http://chart.apis.google.com/chart"
     params = {}
@@ -40,12 +41,20 @@ class Chart
 
   private
   
+  def sort_categories
+    @categories.sort! { |ca, cb| cb.average_count <=> ca.average_count }
+  end
+  
+  def delete_empty_categories
+    @categories.delete_if { |c| c.points.all? { |p| p.count == 0 }}
+  end
+  
   def colors 
     @colors ||= ["FF0000", "00FF00", "0000FF", "000000"]
   end
   
   def chart_legend
-    categories.map { |category| category.name }.join("|")
+    categories.map { |category| "#{category.name} (#{sprintf("%0.2f",category.average_count)} avg)" }.join("|")
   end
   
   def chart_colors
@@ -103,8 +112,18 @@ end
 
 class Category
   attr_accessor :name, :points
+  
   def initialize(name, points=[])
     @name = name
     @points = points
   end
+  
+  def total_count
+    points.map { |p| p.count }.inject { |sum, count| sum + count }
+  end
+  
+  def average_count
+    total_count.to_f / points.length
+  end
+  
 end
