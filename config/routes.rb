@@ -4,7 +4,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :session
 
   map.namespace :admin do |admin|
-    admin.resources :pages
+    admin.resources :pages, :collection => { :sort => :any }
     admin.resources :phrases
     admin.resources :updates
     admin.resources :resets

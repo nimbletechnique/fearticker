@@ -1,17 +1,15 @@
 <h1>Pages</h1>
 <%= render :partial => "admin/warning" %>
-<ul class="sortable">
+<ul id="pagelist">
   <% for page in @pages %>
-    <li>
+    <li id="image_<%= page.id %>">
       <%= image_tag "grabber.png" %>
       <%= link_to page.url, edit_admin_page_path(page) %>
       [ <%= link_to "x", admin_page_path(page), :confirm => "Are you sure?", :method => :delete %> ]
     </li>
   <% end %>
 </ul>
-<table>
-</table>
-
+<%= sortable_element "pagelist", :url => sort_admin_pages_path  %>
 <p>
   <%= link_to "New Page",  new_admin_page_path %>
 </p>

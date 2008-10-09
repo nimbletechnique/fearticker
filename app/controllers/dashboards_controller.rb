@@ -1,7 +1,7 @@
 class DashboardsController < ApplicationController
   
   def show
-    @pages = Page.all.ordered
+    @pages = Page.ordered
   end
   
 end

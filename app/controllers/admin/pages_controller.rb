@@ -3,7 +3,7 @@ class Admin::PagesController < ApplicationController
   before_filter :requires_login
   
   def index
-    @pages = Page.all
+    @pages = Page.ordered
   end
   
   def edit
@@ -33,6 +33,19 @@ class Admin::PagesController < ApplicationController
     @page = Page.find(params[:id])
     @page.destroy
     redirect_to :action => "index"
+  end
+
+  def sort
+    respond_to do |format|
+      params[:pagelist].each do |id|
+        Page.find(id).update_attribute :position, params[:pagelist].index(id)
+      end
+      format.js do
+        render :update do |page|
+          page[:pagelist].highlight
+        end
+      end
+    end
   end
   
 end

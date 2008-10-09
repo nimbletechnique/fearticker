@@ -1,7 +1,7 @@
 class Page < ActiveRecord::Base
 
   named_scope :all, {}
-  named_scope :ordered, :order => "url"
+  named_scope :ordered, :order => "position"
   
   has_many :phrase_counts, :dependent => :destroy
   has_many :phrases, :through => :phrase_counts
