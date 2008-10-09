@@ -50,7 +50,7 @@ class Chart
   end
   
   def colors 
-    @colors ||= ["FF0000", "00FF00", "0000FF", "000000"]
+    @colors ||= ["FF0000", "00FF00", "0000FF", "000000", "F0F3B4", "F1238D"]
   end
   
   def chart_legend
