@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081009154606) do
+ActiveRecord::Schema.define(:version => 20081013013007) do
 
   create_table "pages", :force => true do |t|
     t.string   "url"
@@ -25,6 +25,9 @@ ActiveRecord::Schema.define(:version => 20081009154606) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "phrase_counts", ["created_at"], :name => "index_phrase_counts_on_created_at"
+  add_index "phrase_counts", ["page_id"], :name => "index_phrase_counts_on_page_id"
 
   create_table "phrases", :force => true do |t|
     t.string   "text"

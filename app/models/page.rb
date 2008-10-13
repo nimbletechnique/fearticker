@@ -2,6 +2,7 @@ class Page < ActiveRecord::Base
 
   named_scope :all, {}
   named_scope :ordered, :order => "position"
+  named_scope :including_phrases, :include => [:phrases, :phrase_counts]
   
   has_many :phrase_counts, :dependent => :destroy
   has_many :phrases, :through => :phrase_counts
@@ -24,7 +25,7 @@ class Page < ActiveRecord::Base
   # creates a chart for the specified duration of all applicable phrases
   def chart_for(duration)
     now = Time.now.utc
-    Chart.for_phrase_counts(phrase_counts.in_range(now - duration, now).ordered)
+    Chart.for_phrase_counts(phrase_counts.in_range(now - duration, now).including_phrases.ordered)
   end
   
   def counts_since(phrase, since)

@@ -3,6 +3,7 @@ class PhraseCount < ActiveRecord::Base
   named_scope :for_phrase, lambda { |phrase| { :include => :phrase, :conditions => ["phrases.text = ?", phrase]}}
   named_scope :in_range, lambda { |from, to| { :conditions => ["phrase_counts.created_at >= ? and phrase_counts.created_at <= ?", from, to]}}
   named_scope :ordered, :order => "phrase_counts.created_at"
+  named_scope :including_phrases, :include => :phrase
   
   belongs_to :page
   belongs_to :phrase
