@@ -1,20 +1,108 @@
-<html>
-  <head>
-    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-    <title>Fear Ticker</title>
-    <%= javascript_include_tag :defaults %>
-    <%= stylesheet_link_tag "site" %>
-  </head>
-  <body>
-    <% if logged_in? %>
-      <%= link_to "Home", root_path %> |
-      <%= link_to "Pages", admin_pages_path %> |
-      <%= link_to "Phrases", admin_phrases_path %> |
-      <%= link_to "Update All", admin_updates_path, :method => :post %> |
-      <%= link_to "Reset All", admin_resets_path, :method => :post, :confirm => "Are you sure?" %> |
-      <%= link_to "Logout", logout_path %>
-      <hr/>
-    <% end %>
-    <%= yield :layout %>
-  </body>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <title>Fear Ticker</title>
+  <%= stylesheet_link_tag "site" %>
+  <%= stylesheet_link_tag "custom" %>
+</head>
+
+<body>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="shadow_left">&nbsp;</td>
+    <td class="header_column">
+	    <table width="100%" border="0" cellspacing="10" cellpadding="0">
+        <tr>
+          <td class="logo_area">fearticker.com</td>
+        </tr>
+      </table>
+    </td>
+    <td class="shadow_right">&nbsp;</td>
+  </tr>
+  <tr>
+    <td class="horizontal_column">&nbsp;</td>
+    <td class="horizontal_center"><table width="100%" border="0" cellpadding="0" cellspacing="0" class="linkcontainer">
+      <tr>
+        <td>
+          <div class="navigation">
+            <%= link_to "Home", root_path, :class => "main_link" %>
+          </div>
+        </td>
+        <td>
+          <div class="navigation">
+            <%= link_to "About", root_path, :class => "main_link" %>
+          </div>
+        </td>
+        <% if logged_in? %>
+          <td>
+            <div class="navigation">
+              <%= link_to "Pages", admin_pages_path, :class => "main_link" %>
+            </div>
+          </td>
+          <td>
+            <div class="navigation">
+              <%= link_to "Phrases", admin_phrases_path, :class => "main_link" %>
+            </div>
+          </td>
+          <td>
+            <div class="navigation">
+              <%= link_to "Update All", admin_updates_path, :method => :post, :class => "main_link" %>
+            </div>
+          </td>
+          <td>
+            <div class="navigation">
+              <%= link_to "Reset All", admin_resets_path, :method => :post, :confirm => "Are you sure?", :class => "main_link" %>
+            </div>
+          </td>
+          <td>
+            <div class="navigation">
+              <%= link_to "Logout", logout_path, :class => "main_link" %>
+            </div>
+          </td>        
+        <% end %>
+      </tr>
+    </table></td>
+    <td class="horizontal_column">&nbsp;</td>
+  </tr>
+  <tr>
+    <td class="shadow_left">&nbsp;</td>
+    <td class="below_header">
+      <%# footer content would go here %>
+    </td>
+    <td class="shadow_right">&nbsp;</td>
+  </tr>
+  <tr>
+    <td class="shadow_left">&nbsp;</td>
+    <td class="main_content_box">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td class="">
+            <%= yield :layout %>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td class="shadow_right">&nbsp;</td>
+  </tr>
+  <tr>
+    <td class="shadow_left">&nbsp;</td>
+    <td class="middle_spacer">
+      <div class="bottom_content">
+        <%# bottom content would go here %>
+      </div>
+    </td>
+    <td class="shadow_right">&nbsp;</td>
+  </tr>
+  <tr>
+    <td class="shadow_left">&nbsp;</td>
+    <td class="bottom_link_container">
+    <p>
+      &copy; 2008 fearticker.com
+    </p>
+    </td>
+    <td class="shadow_right">&nbsp;</td>
+  </tr>
+</table>
+</body>
 </html>

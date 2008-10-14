@@ -1,0 +1,10 @@
+ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+ul h2 {
+	border-bottom: solid 3px #aaa;
+	padding: 5px;
+}
