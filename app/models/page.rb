@@ -18,14 +18,14 @@ class Page < ActiveRecord::Base
   def count(*phrases)
     content = fetch
     phrases.flatten.each do |phrase|
-     count_phrase content, phrase 
+      count_phrase content, phrase 
     end
   end
   
   # creates a chart for the specified duration of all applicable phrases
   def chart_for(duration)
     now = Time.now.utc
-    Chart.for_phrase_counts(phrase_counts.in_range(now - duration, now).including_phrases.ordered)
+    Chart.for_phrase_counts(phrase_counts.in_range(now - duration, now).including_phrases.ordered.limited_to(24 * 14))
   end
   
   def counts_since(phrase, since)
