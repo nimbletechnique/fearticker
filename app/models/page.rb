@@ -21,6 +21,10 @@ class Page < ActiveRecord::Base
       count_phrase content, phrase 
     end
   end
+
+  def chart_img
+    Rails.cache.fetch("chart_img_for_page_#{id}", :expires_in => 5.minutes) { chart_for(1.week).to_img }
+  end
   
   # creates a chart for the specified duration of all applicable phrases
   def chart_for(duration)

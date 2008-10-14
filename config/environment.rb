@@ -22,6 +22,7 @@ Rails::Initializer.run do |config|
     :secret      => '78e85b384a208f594c3f6b2a2a61a93c71929a6ab419630faa14fd1eafa0ee88f4758d7c629fc2004a203d7da24bb7486174b2ef91b3f1fba1677fae53866bf9'
   }
 
+  config.cache_store = :memory_store
 end
 
 require 'open-uri'
