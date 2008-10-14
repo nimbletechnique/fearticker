@@ -1,11 +1,10 @@
 <table width="100%">
   <tr>
-    <td>Permalink:</td>
-    <td><%= f.text_field :permalink %></td>
+    <td><%= f.text_field :permalink, :style => "width: 400px;" %></td>
   </tr>
   <tr>
-    <td>Body:</td>
-    <td><%= f.text_area :body %></td>
+    <td><%= f.text_area :body, :style => "width: 400px;", :rows => 10 %></td>
   </tr>
 </table>
+<%= submit_tag "Preview" %>
 <%= submit_tag %>

@@ -1,5 +1,4 @@
-<h1>Content: <%= @content.permalink %></h1>
-<%= @content.body %>
+<%= render :partial => "contents/render", :locals => { :content => @content } %>
 
 <p>
   <%= link_to "Back to Contents", admin_contents_path %> |

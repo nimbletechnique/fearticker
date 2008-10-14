@@ -23,6 +23,7 @@ Rails::Initializer.run do |config|
   }
 
   config.cache_store = :memory_store
+  config.gem "RedCloth"
 end
 
 require 'open-uri'

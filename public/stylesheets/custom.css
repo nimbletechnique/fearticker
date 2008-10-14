@@ -2,9 +2,21 @@ ul {
 	list-style: none;
 	margin: 0;
 	padding: 0;
+	margin-left: 5px;
 }
 
-ul h2 {
+h2 {
 	border-bottom: solid 3px #aaa;
 	padding: 5px;
 }
+
+.content_body {
+	padding: 5px;
+	font-size: 16px;
+}
+
+li a {
+	text-decoration: none;
+	font-size: 14px;
+}
+

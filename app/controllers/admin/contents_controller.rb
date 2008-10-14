@@ -2,6 +2,7 @@ class Admin::ContentsController < ApplicationController
   
   before_filter :requires_login
   before_filter :load_content
+  before_filter :load_preview
   
   def index
     @contents = Content.ordered
@@ -14,7 +15,7 @@ class Admin::ContentsController < ApplicationController
     @content = Content.new(params[:content])
     if @content.save
       flash[:notice] = "Content saved"
-      redirect_to admin_contents_path and return
+      redirect_to admin_content_path(@content) and return
     end
     render :action => "new"
   end
@@ -25,7 +26,7 @@ class Admin::ContentsController < ApplicationController
   def update
     if @content.update_attributes(params[:content])
       flash[:notice] = "Content updated"
-      redirect_to admin_contents_path and return
+      redirect_to admin_content_path(@content) and return
     end
     render :action => "edit"
   end
@@ -40,6 +41,15 @@ class Admin::ContentsController < ApplicationController
   end
 
   private
+  
+  def load_preview
+    if params["commit"] == "Preview"
+      @preview = true
+      @content ||= Content.new
+      @content.attributes = params[:content]
+      render :action => action_name == "create" ? "new" : "edit"
+    end
+  end
   
   def load_content
     @content = Content.find(params[:id]) if params[:id]

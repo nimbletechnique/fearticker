@@ -1,0 +1,4 @@
+<h2><%= h content.permalink.titleize %></h2>
+<div class="content_body">
+  <%= RedCloth.new(content.body).to_html %>
+</div>
