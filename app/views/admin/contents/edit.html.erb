@@ -1,0 +1,6 @@
+<h1>Edit Content</h1>
+
+<%= error_messages_for :content %>
+<% form_for :content, @content, :url => admin_content_path(@content), :html => { :method => :put } do |f|  %>
+  <%= render :partial => "fields", :locals => { :f => f } %>
+<% end %>

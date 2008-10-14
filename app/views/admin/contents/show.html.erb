@@ -1,0 +1,8 @@
+<h1>Content: <%= @content.permalink %></h1>
+<%= @content.body %>
+
+<p>
+  <%= link_to "Back to Contents", admin_contents_path %> |
+  <%= link_to "Edit", edit_admin_content_path(@content) %> |
+  <%= link_to "Delete", admin_content_path(@content), :confirm => "Are you sure?", :method => :delete %>
+</p>

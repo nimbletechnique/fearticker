@@ -29,12 +29,21 @@
             <%= link_to "Home", root_path, :class => "main_link" %>
           </div>
         </td>
-        <td>
-          <div class="navigation">
-            <%= link_to "About", root_path, :class => "main_link" %>
-          </div>
-        </td>
+        
+        <% for content in Content.ordered %>
+          <td>
+            <div class="navigation">
+              <%= link_to content.permalink.titleize, content_path(content.permalink), :class => "main_link" %>
+            </div>
+          </td>
+        <% end %>
+        
         <% if logged_in? %>
+          <td>
+            <div class="navigation">
+              <%= link_to "Content", admin_contents_path, :class => "main_link" %>
+            </div>
+          </td>
           <td>
             <div class="navigation">
               <%= link_to "Pages", admin_pages_path, :class => "main_link" %>

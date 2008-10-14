@@ -1,0 +1,13 @@
+<h1>Site Content</h1>
+
+<ul>
+  <% for content in @contents %>
+    <li>
+      <%= link_to h(content.permalink), admin_content_path(content) %>
+    </li>
+  <% end %>
+</ul>
+
+<p>
+  <%= link_to "New Content", new_admin_content_path %>
+</p>
