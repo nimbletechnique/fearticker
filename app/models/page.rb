@@ -22,8 +22,18 @@ class Page < ActiveRecord::Base
     end
   end
 
+  def cache_chart_img_hash
+    { :time => Time.now, :value => chart_for(1.week).to_img }
+  end
+
   def chart_img
-    Rails.cache.fetch("chart_img_for_page_#{id}", :expire => 1.hour) { chart_for(1.week).to_img }
+    key = "chart_img_for_page_#{id}" 
+    fetched = Rails.cache.fetch(key) { cache_chart_img_hash }
+    if 1.hour.ago > fetched[:time]
+      fetched = cache_chart_img_hash
+      Rails.cache.write(key, fetched)
+    end
+    fetched[:value]
   end
   
   # creates a chart for the specified duration of all applicable phrases
