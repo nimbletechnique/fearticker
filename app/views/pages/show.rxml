@@ -1,2 +1,29 @@
+days = 7
 xml.chart do
+  xml.chart_type "Line"
+  xml.link do
+    xml.area :x => "340", :y => "225", :width => "20", :height => "15", :target => "toggle_fullscreen", :tooltip => "Full Screen Mode"
+  end
+  xml.tooltip :color => "ffffff", :alpha => "90", :background_color => "8888ff", :background_alpha => "90", :shadow => "medium"
+	
+  xml.chart_data do
+
+    # list out each date
+    xml.row do
+      xml.null
+      days.downto(0) do |day|
+        date = Time.now - day.days
+        xml.string date.strftime "%m/%d"
+      end
+    end
+
+    xml.row do
+      xml.string "hi"
+      xml.number 10
+      xml.number 20
+      xml.number 30
+      xml.number 40
+    end
+    
+  end
 end
