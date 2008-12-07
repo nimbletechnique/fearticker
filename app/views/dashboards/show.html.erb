@@ -1,5 +1,8 @@
 <ul id="pages">
   <% for page in @pages %>
-    <%= render :partial => "dashboards/page", :object => page %>
+    <li>
+      <h2><%= h page.url %></h2>
+      <%= render :partial => "chart", :locals => { :page => page } %>
+    </li>
   <% end %>  
 </ul>

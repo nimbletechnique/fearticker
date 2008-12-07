@@ -3,6 +3,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :dashboard
   map.resource :session
   map.resources :contents
+  map.resources :pages
 
   map.namespace :admin do |admin|
     admin.resources :pages, :collection => { :sort => :any }
