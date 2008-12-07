@@ -1,7 +1,8 @@
 class PagesController < ApplicationController
   
   def show
-    render :nothing => true
+    page = Page.find(params[:id])
+    render :xml => page.to_xml
   end
   
 end

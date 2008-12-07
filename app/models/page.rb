@@ -22,34 +22,6 @@ class Page < ActiveRecord::Base
     end
   end
 
-  def cache_chart_img_hash
-    { :time => Time.now, :value => chart_for(1.week).to_img }
-  end
-
-  def chart_img
-    key = "chart_img_for_page_#{id}" 
-    fetched = Rails.cache.fetch(key) { cache_chart_img_hash }
-    if 1.hour.ago > fetched[:time]
-      fetched = cache_chart_img_hash
-      Rails.cache.write(key, fetched)
-    end
-    fetched[:value]
-  end
-  
-  # creates a chart for the specified duration of all applicable phrases
-  def chart_for(duration)
-    now = Time.now.utc
-    Chart.for_phrase_counts(phrase_counts.in_range(now - duration, now).including_phrases.ordered.limited_to(350))
-  end
-  
-  def counts_since(phrase, since)
-    phrase_counts.for_phrase(phrase).in_range(since, Time.now.utc).ordered
-  end
-  
-  def average_count_for_since(phrase, since) 
-    phrase_counts.for_phrase(phrase).in_range(since, Time.now.utc).average("phrase_counts.count")
-  end
-  
   private
   
   def count_phrase(content, phrase)
