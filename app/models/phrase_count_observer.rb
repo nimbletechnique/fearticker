@@ -1,4 +1,4 @@
-class PageCountObserver < ActiveRecord::Observer
+class PhraseCountObserver < ActiveRecord::Observer
   
   def after_save(page_count)
     clear_cache(page_count)
