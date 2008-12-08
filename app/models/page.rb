@@ -22,7 +22,8 @@ class Page < ActiveRecord::Base
   validates_presence_of :url
 
   def self.expire(page_id)
-    ActionController::Base.expire_page("/pages/#{page_id}.xml") 
+    cache_dir = ActionController::Base.page_cache_directory
+    FileUtils.rm_r(Dir.glob(cache_dir+"/pages/#{page_id}*")) rescue Errno::ENOENT
   end
   
   def self.count_all
