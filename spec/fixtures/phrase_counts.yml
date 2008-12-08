@@ -1,3 +1,16 @@
+# == Schema Information
+# Schema version: 20081014141701
+#
+# Table name: phrase_counts
+#
+#  id         :integer         not null, primary key
+#  phrase_id  :integer
+#  page_id    :integer
+#  count      :integer
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 # one:

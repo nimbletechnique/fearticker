@@ -1,3 +1,14 @@
+# == Schema Information
+# Schema version: 20081014141701
+#
+# Table name: phrases
+#
+#  id         :integer         not null, primary key
+#  text       :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 class Phrase < ActiveRecord::Base
 
   named_scope :all, {}

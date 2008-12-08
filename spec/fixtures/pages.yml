@@ -1,3 +1,15 @@
+# == Schema Information
+# Schema version: 20081014141701
+#
+# Table name: pages
+#
+#  id         :integer         not null, primary key
+#  url        :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#  position   :integer
+#
+
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 # one:

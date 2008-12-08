@@ -16,13 +16,15 @@ xml.chart do
         xml.string date.strftime "%m/%d"
       end
     end
-
-    xml.row do
-      xml.string "hi"
-      xml.number 10
-      xml.number 20
-      xml.number 30
-      xml.number 40
+    
+    @page.find_counts(7.days.ago).each do |phrase, data|
+      xml.row do
+        xml.string phrase
+        data.each do |date, values|
+          average = values[:count].to_f / values[:number_counts]
+          xml.number average
+        end
+      end
     end
     
   end

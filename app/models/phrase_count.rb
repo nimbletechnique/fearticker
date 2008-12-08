@@ -1,3 +1,16 @@
+# == Schema Information
+# Schema version: 20081014141701
+#
+# Table name: phrase_counts
+#
+#  id         :integer         not null, primary key
+#  phrase_id  :integer
+#  page_id    :integer
+#  count      :integer
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 class PhraseCount < ActiveRecord::Base
 
   named_scope :for_phrase, lambda { |phrase| { :include => :phrase, :conditions => ["phrases.text = ?", phrase]}}
@@ -11,5 +24,6 @@ class PhraseCount < ActiveRecord::Base
   
   validates_presence_of :page
   validates_presence_of :phrase
+  
   
 end

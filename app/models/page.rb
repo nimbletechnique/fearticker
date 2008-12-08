@@ -1,3 +1,15 @@
+# == Schema Information
+# Schema version: 20081014141701
+#
+# Table name: pages
+#
+#  id         :integer         not null, primary key
+#  url        :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#  position   :integer
+#
+
 class Page < ActiveRecord::Base
 
   named_scope :all, {}
@@ -14,11 +26,20 @@ class Page < ActiveRecord::Base
       page.count Phrase.all.map { |phrase| phrase.text }
     end
   end
-  
-  def count(*phrases)
-    content = fetch
-    phrases.flatten.each do |phrase|
-      count_phrase content, phrase 
+
+  def find_counts(start_date)
+    counts = PhraseCount.find(:all, {
+      :select => "phrase_counts.*, date(phrase_counts.created_at) as date",
+      :include => :phrase,
+      :conditions => ["phrase_counts.page_id = ? AND phrase_counts.created_at >= ?", id, start_date.beginning_of_day],
+      :order => "created_at"
+    })
+    counts.inject({}) do |hash, phrase_count|
+      phrase_hash = hash[phrase_count.phrase.text] ||= {}
+      date_hash = phrase_hash[phrase_count.date] ||= { :count => 0, :number_counts => 0}
+      date_hash[:count] += phrase_count.count
+      date_hash[:number_counts] += 1
+      hash
     end
   end
 
