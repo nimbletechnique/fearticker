@@ -22,7 +22,7 @@ class Page < ActiveRecord::Base
   validates_presence_of :url
 
   def self.expire(page_id)
-    ActionController::Base.expire_page("/pages/show/#{page_id}.xml") 
+    ActionController::Base.expire_page("/pages/#{page_id}.xml") 
   end
   
   def self.count_all
