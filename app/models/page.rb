@@ -23,7 +23,7 @@ class Page < ActiveRecord::Base
 
   def self.expire(page_id)
     cache_dir = ActionController::Base.page_cache_directory
-    FileUtils.rm_r(Dir.glob(cache_dir+"/pages/#{page_id}*")) rescue Errno::ENOENT
+    FileUtils.rm_r(Dir.glob(cache_dir+"/pages/#{page_id}.*")) rescue Errno::ENOENT
   end
   
   def self.count_all
