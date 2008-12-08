@@ -20,6 +20,10 @@ class Page < ActiveRecord::Base
   has_many :phrases, :through => :phrase_counts
   
   validates_presence_of :url
+
+  def self.expire(page_id)
+    ActionController::Base.expire_page("/pages/show/#{page_id}.xml") 
+  end
   
   def self.count_all
     Page.all.each do |page|

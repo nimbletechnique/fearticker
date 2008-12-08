@@ -24,6 +24,9 @@ Rails::Initializer.run do |config|
 
   config.cache_store = :memory_store
   config.gem "RedCloth"
+  
+  config.active_record.observers = [:page_observer, :page_count_observer]
+  
 end
 
 require 'open-uri'
