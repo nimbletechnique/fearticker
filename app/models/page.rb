@@ -48,7 +48,16 @@ class Page < ActiveRecord::Base
     end
   end
 
+  def count(*phrases)
+    content = fetch
+    phrases.flatten.each do |phrase|
+      count_phrase content, phrase
+    end
+  end
+   
   private
+
+  
   
   def count_phrase(content, phrase)
     phrase_counts.create({
