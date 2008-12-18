@@ -1,5 +1,3 @@
-require 'mongrel_cluster/recipes'
-
 set :application, "fearticker"
 set :hostname, "www.fearticker.com"
 
@@ -20,12 +18,11 @@ role :app, "#{host}"
 role :web, "#{host}"
 role :db,  "#{host}", :primary => true
 
+
 namespace :deploy do
-  desc "Restart the Mongrel cluster"
-  task :restart, :roles => :app do
-    mongrel.cluster.stop
-    sleep 2.5
-    mongrel.cluster.start
+  desc "Restart Application"
+  task :restart do
+    run "touch #{current_path}/tmp/restart.txt"
   end
 end
 
